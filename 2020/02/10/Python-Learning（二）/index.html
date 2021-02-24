@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="ql-isaac">
+
+
+    <meta name="subtitle" content="It's a beautiful day!">
+
+
+    <meta name="description" content="学习与生活">
+
+
+    <meta name="keywords" content="学习与生活">
+
+
+<title>Python从入门到实践（二） | ql&#39;s HexoBlog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ql&#39;s HexoBlog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ql&#39;s HexoBlog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Python从入门到实践（二）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">ql-isaac</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 10, 2020&nbsp;&nbsp;15:01:37</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">Python从入门到实践</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>　　《Python从入门到实践（一）》是Python初级部分的学习笔记，主要是一些基础方面的内容，本篇就为Python高级部分的学习笔记，主要是一些面向对象方面的内容。</p>
+<span id="more"></span>
+
+<h2 id="搭建实践环境"><a href="#搭建实践环境" class="headerlink" title="搭建实践环境"></a>搭建实践环境</h2><p>　　<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download/">下载最流行的最新版的Python开发软件PyCharm</a>，建议下载专业版，但是是收费的，如果你和我一样是用来学习的，可以在网上寻找方法免费使用。</p>
+<ol>
+<li>下载好安装程序后直接双击运行，Next；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%8F%8C%E5%87%BB%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F.png" alt="双击运行程序"></p>
+<ol start="2">
+<li>设置安装路径：将C改为D，Next；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E8%AE%BE%E7%BD%AE%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84.png" alt="设置安装路径"></p>
+<ol start="3">
+<li>勾选如图这两个选项，Next；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%8B%BE%E9%80%89.png" alt="勾选"></p>
+<ol start="4">
+<li>Install;</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/Install.png" alt="Install"></p>
+<ol start="5">
+<li>勾选，Finish；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/Finish.png" alt="Finish"></p>
+<ol start="6">
+<li>不导入设定，直接点OK;</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/OK.png" alt="OK"></p>
+<ol start="7">
+<li>勾选，Continue；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%90%8C%E6%84%8F.png" alt="同意"></p>
+<ol start="8">
+<li>Don’t sent；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%90%A6.png" alt="否"></p>
+<ol start="9">
+<li>勾选明亮主题，选择左边的，点击；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/Light.png" alt="Light"></p>
+<ol start="10">
+<li>需要学习化，如何学习化这里就不多说了；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%BF%80%E6%B4%BB.png" alt="激活"></p>
+<ol start="11">
+<li>学习化完成，创建新项目，点击Create New Project；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%88%9B%E5%BB%BA.png" alt="创建"></p>
+<ol start="12">
+<li>新建一个学习文件夹D:\Python Learning\（二）\ql\，点击Browse，找到新建的文件夹，确定；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/Create.png" alt="Create"></p>
+<ol start="13">
+<li>进行一些设置，点击files，点击Settings，在搜索框中搜索font，按自己喜好设置字体和字体属性，我这里就仅仅将字体尺寸设大点吧，设为20，确定；</li>
+</ol>
+<p><img src="https://image.ql-isaac.cn/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/font.png" alt="font"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>ql-isaac</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2020/02/10/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/">http://example.com/2020/02/10/Python-Learning%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Windows-10-%E4%BC%81%E4%B8%9A%E7%89%88-LTSC/"># Windows 10 企业版 LTSC</a>
+                    
+                        <a href="/tags/Python-v3-8-1/"># Python v3.8.1</a>
+                    
+                        <a href="/tags/Pycharm/"># Pycharm</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/13/C-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">C从入门到精通（一）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/06/Java-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">Java从入门到实践（一）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© ql-isaac | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | 2020 - 2021</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

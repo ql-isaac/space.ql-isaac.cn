@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="ql-isaac">
+
+
+    <meta name="subtitle" content="It's a beautiful day!">
+
+
+    <meta name="description" content="学习与生活">
+
+
+    <meta name="keywords" content="学习与生活">
+
+
+<title>Oracle数据库从入门到精通（一） | ql&#39;s HexoBlog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ql&#39;s HexoBlog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ql&#39;s HexoBlog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Oracle数据库从入门到精通（一）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">ql-isaac</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 29, 2020&nbsp;&nbsp;18:22:37</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">Oracle数据库从入门到精通</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>　　参考视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NJ411M7fE?p=80">https://www.bilibili.com/video/BV1NJ411M7fE?p=80</a></p>
+<span id="more"></span>
+
+<h2 id="下载Oracle-Database-11g-Release-2"><a href="#下载Oracle-Database-11g-Release-2" class="headerlink" title="下载Oracle Database 11g Release 2"></a>下载Oracle Database 11g Release 2</h2><p>　　访问官方<a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/oracle-database-software-downloads.html">Oracle Database 11g Release 2下载地址</a>下载即可，注意有两个压缩包，下好后分别右键解压到当前目录，这样就得到了安装文件夹database。</p>
+<h2 id="安装和配置Oracle-Database-11g-Release-2"><a href="#安装和配置Oracle-Database-11g-Release-2" class="headerlink" title="安装和配置Oracle Database 11g Release 2"></a>安装和配置Oracle Database 11g Release 2</h2><ol>
+<li>打开database文件夹，双击setup.exe安装，刚开始有一个如下图的错误，解决办法是编辑database下的stage下的cvu下的cvu_prereq.xml，在<CERTIFIED_SYSTEMS></CERTIFIED_SYSTEMS>间的最后位置添加以下代码，保存并关闭，重新安装即可。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E9%94%99%E8%AF%AF.png" alt="错误"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">OPERATING_SYSTEM</span> <span class="attr">RELEASE</span>=<span class="string">&quot;6.2&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">VERSION</span> <span class="attr">VALUE</span>=<span class="string">&quot;3&quot;</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">ARCHITECTURE</span> <span class="attr">VALUE</span>=<span class="string">&quot;64-bit&quot;</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">NAME</span> <span class="attr">VALUE</span>=<span class="string">&quot;Windows 10&quot;</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">ENV_VAR_LIST</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">ENV_VAR</span> <span class="attr">NAME</span>=<span class="string">&quot;PATH&quot;</span> <span class="attr">MAX_LENGTH</span>=<span class="string">&quot;1023&quot;</span> /&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">ENV_VAR_LIST</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">OPERATING_SYSTEM</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>不更新，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E4%B8%8D%E6%9B%B4%E6%96%B0.png" alt="不更新"></p>
+<ol start="3">
+<li>直接下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%88%9B%E5%BB%BA.png" alt="创建"></p>
+<ol start="4">
+<li>选择服务器类，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%B1%BB.png" alt="服务器类"></p>
+<ol start="5">
+<li>直接下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%8D%95%E5%AE%9E%E4%BE%8B.png" alt="单实例"></p>
+<ol start="6">
+<li>选择高级安装，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E9%AB%98%E7%BA%A7%E5%AE%89%E8%A3%85.png" alt="高级安装"></p>
+<ol start="7">
+<li>默认即可，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%AF%AD%E8%A8%80.png" alt="语言"></p>
+<ol start="8">
+<li>就选择企业版，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BC%81%E4%B8%9A%E7%89%88.png" alt="企业版"></p>
+<ol start="9">
+<li>默认即可，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E9%BB%98%E8%AE%A4%E5%8D%B3%E5%8F%AF.png" alt="默认即可"></p>
+<ol start="10">
+<li>默认即可，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E4%B8%8B%E4%B8%80%E6%AD%A5.png" alt="下一步"></p>
+<ol start="11">
+<li>自定义SID的名称，不改，就默认也行；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%87%AA%E5%AE%9A%E4%B9%89SID%E7%9A%84%E5%90%8D%E7%A7%B0.png" alt="自定义SID的名称"></p>
+<ol start="12">
+<li>使用Unicode字符集；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/Unicode.png" alt="Unicode"></p>
+<ol start="13">
+<li>勾选创建具有示例方案的数据库，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%88%9B%E5%BB%BA%E5%85%B7%E6%9C%89%E7%A4%BA%E4%BE%8B%E6%96%B9%E6%A1%88%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt="创建具有示例方案的数据库"></p>
+<ol start="14">
+<li>默认即可，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%BF%87.png" alt="过"></p>
+<ol start="15">
+<li>默认即可，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%86%8D%E8%BF%87.png" alt="再过"></p>
+<ol start="16">
+<li>不启动自动备份，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E4%B8%8D%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD.png" alt="不自动备份"></p>
+<ol start="17">
+<li>个人学习用，为了方便，设置为对所有账户使用相同的口令（口令必须以字母开头），下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%AE%BE%E7%BD%AE%E5%8F%A3%E4%BB%A4.png" alt="设置口令"></p>
+<ol start="18">
+<li>检查到错误，可以忽略，勾选全部忽略，下一步；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E6%A3%80%E6%9F%A5%E5%88%B0%E9%94%99%E8%AF%AF.png" alt="检查到错误"></p>
+<ol start="19">
+<li>点击完成，等待；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E7%AD%89%E5%BE%85.png" alt="等待"></p>
+<ol start="20">
+<li>点击口令管理；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%8F%A3%E4%BB%A4%E7%AE%A1%E7%90%86.png" alt="口令管理"></p>
+<ol start="21">
+<li>设置sys用户密码为change_on_install，设置system用户为manager，解锁SCOTT用户并设置密码为tiger，解锁SH用户并设置密码为sh，确定，是，确定；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%AE%BE%E7%BD%AE%E5%9B%9B%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81.png" alt="设置四个用户的密码"></p>
+<ol start="22">
+<li>安装完成；</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%AE%8C%E6%88%90.png" alt="完成"></p>
+<h2 id="SQL-PLUS的使用"><a href="#SQL-PLUS的使用" class="headerlink" title="SQL PLUS的使用"></a>SQL PLUS的使用</h2><h3 id="登录SCOTT用户"><a href="#登录SCOTT用户" class="headerlink" title="登录SCOTT用户"></a>登录SCOTT用户</h3><p>　　命令行CMD里输入sqlplus，输入scott，再输入密码tiger（不会回显），即可登录SCOTT用户。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E7%99%BB%E5%BD%95scott%E7%94%A8%E6%88%B7.gif" alt="登录scott用户"></p>
+<h3 id="第一次查询"><a href="#第一次查询" class="headerlink" title="第一次查询"></a>第一次查询</h3><p>　　数据库最重要的组成对象是表，登录上SCOTT用户后，首先通过以下命令查询一下该用户有哪些表吧。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> TAB;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9F%A5%E8%AF%A2.gif" alt="第一次查询"></p>
+<p>　　呃，查询结果显示得比较乱，有一个命令可以解决这个问题，如下，设置每行显示的数据长度，执行完这个命令后再查询一下SCOTT用户有哪些表看看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET LINESIZE 100</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98.gif" alt="显示问题"></p>
+<p>　　呃，如果觉得TNAME列的数据所占的长度太长了，有一个命令可以解决这个问题，如下，设置TNAME列的数据所占的长度，执行完这个命令后再查询一下SCOTT用户有哪些表看看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COL TNAME FOR A20</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%A4%AA%E9%95%BF%E4%BA%86.gif" alt="太长了"></p>
+<p>　　终于，能很舒服地查看到SCOTT用户下有四个表：BONUS、DEPT、EMP和SALGRADE。那么，再查询一下DEPT表吧。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> DEPT;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%86%8D%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8BDEPT%E8%A1%A8.gif" alt="再查询一下DEPT表"></p>
+<h3 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h3><p>　　换个用户登录是怎样的命令？如下命令格式，其中<code>[]</code>表示可选内容，<code>|</code>表示多选一。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONN[ECT] 用户名&#x2F;密码 [AS SYSDBA|SYSUSER]</span><br></pre></td></tr></table></figure>
+
+<p>　　登录sys用户看看，由于sys是超级管理员用户，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONN SYS&#x2F;change_on_install AS SYSDBA</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%88%87%E6%8D%A2%E5%88%B0sys%E7%94%A8%E6%88%B7.png" alt="切换到sys用户"></p>
+<p>　　登录system用户看看，由于sys是普通管理员用户，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONN SYSTEM&#x2F;manager</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%88%87%E6%8D%A2%E5%88%B0system%E7%94%A8%E6%88%B7.png" alt="切换到system用户"></p>
+<p>　　system用户和sys用户都是管理员，应该是可以查询到SCOTT用户的DEPT表的，来试试。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> DEPT;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E8%A1%A8%E6%88%96%E8%A7%86%E5%9B%BE%E4%B8%8D%E5%AD%98%E5%9C%A8.png" alt="表或视图不存在"></p>
+<p>　　来确认一下当前用户是否是管理员用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW USER</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/SHOWUSER.png" alt="SHOWUSER"></p>
+<p>　　这就奇怪了，难道不能查询到？原来，是需要在表前指定用户。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> SCOTT.DEPT;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/%E5%8A%A0%E7%94%A8%E6%88%B7%E5%90%8D.png" alt="加用户名"></p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><p>　　关系型数据库的理论诞生之后，世界上出现了许多的关系型数据库管理系统，熟悉了A关系型数据库管理系统后几乎还得重新学B关系型数据库管理系统，这很大程度上是由于每个关系型数据库管理系统都实现了自己的一套语言，语言只是一种工具，弄那么多套语言毫无意义，于是，SQL（Structured Query Language，即结构化查询语言）作为一个标准和一个功能强大的关系型数据库语言诞生了。</p>
+<p>　　SQL分为以下几类：</p>
+<ul>
+<li>DML（Data Manipulation Language，数据操作语言）：数据查询（SELECT)、数据更新（UPDATE、INSERT和DELETE）和事务管理等。</li>
+<li>DDL（Data Definition Language，数据定义语言）：数据对象定义等（用户和数据表等）。</li>
+<li>DCL（Data Control Language，数据控制语言）：授权等。</li>
+</ul>
+<h2 id="SCOTT的数据表分析"><a href="#SCOTT的数据表分析" class="headerlink" title="SCOTT的数据表分析"></a>SCOTT的数据表分析</h2><p>　　在Oracle 11g以前SCOTT和其数据表等是会默认给用户提供的，如果在以上安装Oracle 11g的步骤13中未勾选创建具有示例方案的数据库，我们就需要手动执行一个脚本，该脚本在如下路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\app\ql\product\11.2.0\dbhome_1\RDBMS\ADMIN\scott.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="部门信息表（DEPT"><a href="#部门信息表（DEPT" class="headerlink" title="部门信息表（DEPT)"></a>部门信息表（DEPT)</h3><p>　　先切换回SCOTT用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONN SCOTT&#x2F;tiger</span><br></pre></td></tr></table></figure>
+
+<p>　　查询DEPT：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> DEPT;</span><br></pre></td></tr></table></figure>
+
+<p>　　查看数据表的结构的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC 数据表;</span><br></pre></td></tr></table></figure>
+
+<p>　　查看DEPT的结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC DEPT;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/DEPT%E7%9A%84%E7%BB%93%E6%9E%84.png" alt="DEPT的结构"></p>
+<p>　　DEPT的结构解释：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>类型</th>
+<th>类型作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DEPTNO</td>
+<td>部门编号</td>
+<td>NUMBER(2)</td>
+<td>最多2位数字</td>
+<td></td>
+</tr>
+<tr>
+<td>DNAME</td>
+<td>部门名称</td>
+<td>VARCHAR2(14)</td>
+<td>最多14位字符</td>
+<td>3位字符保存中文</td>
+</tr>
+<tr>
+<td>LOC</td>
+<td>部门位置</td>
+<td>VARCHAR2(13)</td>
+<td>最多13为字符</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="雇员信息表（EMP）"><a href="#雇员信息表（EMP）" class="headerlink" title="雇员信息表（EMP）"></a>雇员信息表（EMP）</h3><p>　　查询EMP：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> EMP;</span><br></pre></td></tr></table></figure>
+
+<p>　　同样有显示问题，设置一行的长度为150：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET LINESIZE 150</span><br></pre></td></tr></table></figure>
+
+<p>　　再查询EMP：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/EMP.png" alt="EMP"></p>
+<p>　　查看EMP的结构：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESC</span> EMP;</span><br></pre></td></tr></table></figure>
+
+<p>　　EMP的结构解释：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>类型</th>
+<th>类型作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EMPNO</td>
+<td>雇员编号</td>
+<td>NUMBER(4)</td>
+<td>最多4位数字</td>
+<td></td>
+</tr>
+<tr>
+<td>ENAME</td>
+<td>雇员姓名</td>
+<td>VARCHAR2(10)</td>
+<td>最多10位字符</td>
+<td></td>
+</tr>
+<tr>
+<td>JOB</td>
+<td>雇员职位</td>
+<td>VARCHAR2(9)</td>
+<td>最多9位字符</td>
+<td></td>
+</tr>
+<tr>
+<td>MGR</td>
+<td>领导编号</td>
+<td>NUMBER(4)</td>
+<td>最多4位数字</td>
+<td>领导本身也是雇员</td>
+</tr>
+<tr>
+<td>HIREDATE</td>
+<td>雇佣日期</td>
+<td>DATE</td>
+<td></td>
+<td>包含日期和时间</td>
+</tr>
+<tr>
+<td>SAL</td>
+<td>基本工资</td>
+<td>NUMBER(7,2)</td>
+<td>小数位最多2位，整数位最多5位</td>
+<td></td>
+</tr>
+<tr>
+<td>COMM</td>
+<td>佣金</td>
+<td>NUMBER(7,2)</td>
+<td>小数位最多2位，整数位最多5位</td>
+<td>只有销售职位的雇员才会存在有佣金</td>
+</tr>
+<tr>
+<td>DEPTNO</td>
+<td>部门编号</td>
+<td>NUMBER(2)</td>
+<td>最多2位数字</td>
+<td>雇员所在的部门编号</td>
+</tr>
+</tbody></table>
+<h3 id="工资等级表（SALGRADE）"><a href="#工资等级表（SALGRADE）" class="headerlink" title="工资等级表（SALGRADE）"></a>工资等级表（SALGRADE）</h3><p>　　查询SALGRADE：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> SALGRADE;</span><br></pre></td></tr></table></figure>
+
+<p>　　查看SALGRADE的结构：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESC</span> SALGRADE;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/SALGRADE.png" alt="SALGRADE"></p>
+<p>　　SALGRADE的结构解释：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>类型</th>
+<th>类型作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GRADE</td>
+<td>等级编号</td>
+<td>NUMBER</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LOSAL</td>
+<td>此等级的最低工资</td>
+<td>NUMBER</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HISAL</td>
+<td>此等级的最高工资</td>
+<td>NUMBER</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="工资表（BONUS"><a href="#工资表（BONUS" class="headerlink" title="工资表（BONUS)"></a>工资表（BONUS)</h3><p>　　BONUS表没有数据，只有表结构。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ql-isaac/CDN1/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/BONUS.png" alt="BONUS"></p>
+<p>　　BONUS的结构解释：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>类型</th>
+<th>类型作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ENAME</td>
+<td>雇员姓名</td>
+<td>VARCHAR2(10)</td>
+<td>最多10位字符</td>
+<td></td>
+</tr>
+<tr>
+<td>JOB</td>
+<td>职位</td>
+<td>VARCHAR2(9)</td>
+<td>最多9位字符</td>
+<td></td>
+</tr>
+<tr>
+<td>SAL</td>
+<td>基本工资</td>
+<td>NUMBER</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>COMM</td>
+<td>佣金</td>
+<td>NUMBER</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>ql-isaac</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2020/02/29/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">http://example.com/2020/02/29/Oracle-Database-Learning%EF%BC%88%E4%B8%80%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Windows-10-%E4%B8%93%E4%B8%9A%E7%89%88/"># Windows 10 专业版</a>
+                    
+                        <a href="/tags/Oracle-Database-11g-Release-2/"># Oracle Database 11g Release 2</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/09/26/hello-world/">Hello,World!</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/13/C-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">C从入门到精通（一）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© ql-isaac | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | 2020 - 2021</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="ql-isaac">
+
+
+    <meta name="subtitle" content="It's a beautiful day!">
+
+
+    <meta name="description" content="学习与生活">
+
+
+    <meta name="keywords" content="学习与生活">
+
+
+<title>我的HexoBlog的诞生（三） | ql&#39;s HexoBlog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ql&#39;s HexoBlog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ql&#39;s HexoBlog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我的HexoBlog的诞生（三）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">ql-isaac</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 24, 2020&nbsp;&nbsp;22:53:39</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%88%91%E7%9A%84HexoBlog%E7%9A%84%E8%AF%9E%E7%94%9F/">我的HexoBlog的诞生</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>　　本文记录和讲解我的HexoBlog的使用，会持续更新。</p>
+<span id="more"></span>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
+
+<h2 id="使用Typora编辑Markdown文件，书写博客文章"><a href="#使用Typora编辑Markdown文件，书写博客文章" class="headerlink" title="使用Typora编辑Markdown文件，书写博客文章"></a>使用Typora编辑Markdown文件，书写博客文章</h2><p>　　通过执行<code>hexo new post &lt;自定义md文件名&gt;</code>，相应Markdown文件将在_posts下生成，那么该如何编辑这种Markdown文件，书写自己的博客文章呢？</p>
+<h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><p>　　Markdown是一种轻量级的标记语言，类似于HTML，但Markdown的语法十分简单，常用的标记符号也不超过十个。</p>
+<h3 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h3><p>　　Typora是一个Markdown文件阅读器与编辑器，支持MacOS、Windows、Linux平台，可到<a target="_blank" rel="noopener" href="https://typora.io/">Typora 官网</a>下载。</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>　　使用<code>#</code>可表示1-6级标题。一级标题对应一个#，二级标题对应两个# ，以此类推，如下视频（注意#后面有一个空格）。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br></pre></td></tr></table></figure>
+
+<p>　　演示视频：</p>
+<p><video id="video1" preload controls loop style="height: 100%;width: 100%;object-fit: cover;"></video></p>
+<script>
+  if (Hls.isSupported()) {
+    var video1 = document.getElementById('video1');
+    var hls = new Hls();
+    hls.loadSource('https://cdn.jsdelivr.net/gh/ql-isaac/CDN2/标题/标题.m3u8');
+    hls.attachMedia(video1);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+  }
+</script>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>　　经常用的是有序列表和无序列表。使用<code>&lt;序号&gt;. </code>（<code>.</code>后面有一个空格）可表示有序列表，回车自动生成下一项，如下图。</p>
+<p><img src="https://image.ql-isaac.cn/%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8.gif" alt="有序列表"></p>
+<p>　　使用<code>- </code>（<code>-</code>后面有空格）可表示无序列表，回车自动生成下一项，如下图。</p>
+<p><img src="https://image.ql-isaac.cn/%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8.gif" alt="无序列表"></p>
+<p>　　还有一个任务列表，使用<code>- [ ] </code>（<code>[ ]</code>后面有空格）可表示任务列表，回车自动生成下一项，如下图。</p>
+<p><img src="https://image.ql-isaac.cn/%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8.gif" alt="任务列表"></p>
+<h2 id="如何在文章中插入图片、视频和音乐？"><a href="#如何在文章中插入图片、视频和音乐？" class="headerlink" title="如何在文章中插入图片、视频和音乐？"></a>如何在文章中插入图片、视频和音乐？</h2><h3 id="开启每篇文章的资源文件夹"><a href="#开启每篇文章的资源文件夹" class="headerlink" title="开启每篇文章的资源文件夹"></a>开启每篇文章的资源文件夹</h3><p>　　打开Hexo的配置文件，关键字post_asset_folder查找，将post_asset_folder的值改为true。每次新生成layout（layout默认有 post、page 和 draft三种 ）时都会在对应生成的Markdown文件同级目录下生成一个对应的资源文件夹，可将图片、音乐或视频存入该文件夹，这样，想插入图片、音乐或视频时直接填写图片、音乐或视频的完整文件名即可。</p>
+<h3 id="在文章内插入视频"><a href="#在文章内插入视频" class="headerlink" title="在文章内插入视频"></a>在文章内插入视频</h3><p>　　在[存储HexoBlog的文件夹]下进入终端，输入如下命令安装 hexo-tag-dplayer。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-tag-dplayer</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问体验优化"><a href="#访问体验优化" class="headerlink" title="访问体验优化"></a>访问体验优化</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>ql-isaac</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2020/01/24/%E6%88%91%E7%9A%84HexoBlog%E7%9A%84%E8%AF%9E%E7%94%9F%EF%BC%88%E4%B8%89%EF%BC%89/">http://example.com/2020/01/24/%E6%88%91%E7%9A%84HexoBlog%E7%9A%84%E8%AF%9E%E7%94%9F%EF%BC%88%E4%B8%89%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Windows-10-%E4%BC%81%E4%B8%9A%E7%89%88-LTSC/"># Windows 10 企业版 LTSC</a>
+                    
+                        <a href="/tags/Hexo-v4-2-0/"># Hexo v4.2.0</a>
+                    
+                        <a href="/tags/Markdown/"># Markdown</a>
+                    
+                        <a href="/tags/Typora/"># Typora</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/01/24/%E4%BB%80%E4%B9%88%E6%98%AFGit%EF%BC%9F/">什么是Git？</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/24/%E6%88%91%E7%9A%84HexoBlog%E7%9A%84%E8%AF%9E%E7%94%9F%EF%BC%88%E4%BA%8C%EF%BC%89/">我的HexoBlog的诞生（二）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© ql-isaac | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | 2020 - 2021</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

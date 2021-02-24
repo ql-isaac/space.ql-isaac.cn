@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="ql-isaac">
+
+
+    <meta name="subtitle" content="It's a beautiful day!">
+
+
+    <meta name="description" content="学习与生活">
+
+
+    <meta name="keywords" content="学习与生活">
+
+
+<title>Python从入门到实践（一） | ql&#39;s HexoBlog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ql&#39;s HexoBlog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ql&#39;s HexoBlog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Python从入门到实践（一）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">ql-isaac</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 27, 2020&nbsp;&nbsp;18:09:17</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">Python从入门到实践</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>　　在当今的环境下Python逐渐成为一门热门的语言，作为一门有着30年发展历史的编程语言，其在数据分析领域以及人工智能领域发挥着重要作用。Python是基于C语言，一诞生就具备了完善的语法，其给程序员最直观的印象是——它的简洁性。</p>
+<span id="more"></span>
+
+<h2 id="Python特点"><a href="#Python特点" class="headerlink" title="Python特点"></a>Python特点</h2><ol>
+<li>语法简单灵活；</li>
+<li>规范化代码；</li>
+<li>Python是一个开源项目，有着广泛的开发支持；</li>
+<li>Python是一门面向对象的编程语言；</li>
+<li>Python具有强大的可移植性；</li>
+<li>Python属于解释性的编程语言；</li>
+<li>Python是一个“胶水语言”；</li>
+<li>Python拥有良好的并发处理支持。</li>
+</ol>
+<h2 id="搭建Python学习环境"><a href="#搭建Python学习环境" class="headerlink" title="搭建Python学习环境"></a>搭建Python学习环境</h2><p>　　前往<a target="_blank" rel="noopener" href="https://www.python.org/">Python官网</a>下载最新版Python，需要说明的是，Python2.x和Python3.x之间存在较大差异，在开发中一般都使用Python3.x，本次使用的版本为3.8.1。</p>
+<p><img src="https://image.ql-isaac.cn/%E6%9C%80%E6%96%B0%E7%89%88Python%E4%B8%8B%E8%BD%BD.png" alt="最新版Python下载"></p>
+<p>　　下载完成后运行安装程序，勾选Add Python 3.8 to PATH，点击Customize installation，点击Next，点击Install，等待安装完成。按下Windows+R组合键，输入CMD进入命令行窗口，输入python，发现可进入Python交互式环境，如下图。</p>
+<p><img src="https://image.ql-isaac.cn/Python%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%8E%AF%E5%A2%83.png" alt="Python交互式环境"></p>
+<p>　　文本编辑器到底哪家强？我推荐Visual Studio Code。<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">前往官网</a>，点击Download for Windows，下载完成后运行安装程序，下一步即可，但建议到下图这一步时勾选上这三个选项，等待安装完成。安装完成后进入Visual Studio Code，点击左边第五个图标，搜索chinese，如下图，点击Install安装简体中文包，安装完成后点击Restart Now，仍然点击左边第五个图标，搜索python，点击第一个，安装。</p>
+<p><img src="https://image.ql-isaac.cn/Visual-Studio-Code-%E5%8B%BE%E9%80%89.png" alt="勾选"></p>
+<p><img src="https://image.ql-isaac.cn/%E5%AE%89%E8%A3%85%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E5%8C%85.png" alt="安装简体中文包"></p>
+<h2 id="Python学习起步"><a href="#Python学习起步" class="headerlink" title="Python学习起步"></a>Python学习起步</h2><p>　　虽然Python拥有交互式环境，但是无论如何，程序是需要定义在源文件之中的，Python源文件的后缀为py。</p>
+<p>　　新建一个学习文件夹，打开Visual Studio Code，打开文件夹，如下图，选择学习文件夹（也可以直接右键学习文件夹，选择通过Code打开），再新建文件夹，命名为20200203（以当天的年月日命名），在该文件夹下新建文件，命名为hello_world.py，文件中输入以下一行代码，Ctrl+S保存。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;Hello,world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://image.ql-isaac.cn/%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt="打开文件夹"></p>
+<p>　　点击右上角运行图标，可看到学习任何一个编程语言第一个程序的运行结果，如下图。</p>
+<p><img src="https://image.ql-isaac.cn/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F.png" alt="第一个程序"></p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li> 单行注释：<code># [注释内容]</code></li>
+<li> 多行注释：<code>&#39;&#39;&#39;[多行注释内容]&#39;&#39;&#39;</code>或<code>&quot;&quot;&quot;[多行注释内容]&quot;&quot;&quot;</code></li>
+</ul>
+<h2 id="变量（对象）"><a href="#变量（对象）" class="headerlink" title="变量（对象）"></a>变量（对象）</h2><p>　　Python 中的变量不需要声明，每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p>
+<p>　　范例：使用变量（修改文件hello_world.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Hello,world!&quot;</span></span><br><span class="line">print(message)</span><br><span class="line">message = <span class="string">&quot;Hello,ql!&quot;</span></span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!</span><br><span class="line">Hello,ql!</span><br></pre></td></tr></table></figure>
+
+<p>　　可以同时为多个变量赋值。</p>
+<p>　　范例：为多个变量赋值（修改文件hello_world.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message1, message2 = <span class="string">&quot;Hello,world!&quot;</span>, <span class="string">&quot;Hello,ql!&quot;</span></span><br><span class="line">print(message1)</span><br><span class="line">print(message2)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!</span><br><span class="line">Hello,ql!</span><br></pre></td></tr></table></figure>
+
+<p>　　值得说明的是，如果我们比较熟悉面向对象的编程的话，Python语言里面所有的变量严格意义上来讲应该被称为“对象”；</p>
+<p>　　范例：定义变量但是不设置内容(新建文件None.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="literal">None</span> <span class="comment"># 空引用</span></span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">None</span><br></pre></td></tr></table></figure>
+
+<p>　　很多编程语言都会使用<code>;</code>作为每行程序的完结符，然而<code>;</code>在Python中被设计为可选符号，如果希望在一行定义多个变量，可用<code>;</code>。</p>
+<p>　　范例：使用<code>;</code>对一行中的多个变量进行区分（新建文件hello_ql.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Hello,world&quot;</span> ;print(message) ;message = <span class="string">&quot;Hello,ql!&quot;</span> ;print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!</span><br><span class="line">Hello,ql!</span><br></pre></td></tr></table></figure>
+
+<p>　　和其他语言一样，Python中，我们在命名变量时也需要遵守一些规则和指南，违反规则将导致错误，遵守指南让你编写的代码更容易阅读和理解：</p>
+<ul>
+<li>变量名只能包含字母、数字和下划线。变量名可以以字母或下划线开头但不能以数字开头；</li>
+<li>变量名不能包含空格，但可用下划线代替；</li>
+<li>不要将Python关键字用做变量名，注意将Python内置函数用做变量名时，虽然不会导致错误但将覆盖这些函数；</li>
+<li>变量名应即简短又具有描述性。例如：name比n好，student_name比s_n好，name_length比length_of_persons_name;</li>
+<li>慎用小写字母i和大写字母O，因为它们可能被人错看成数字1和0。</li>
+</ul>
+<h2 id="常用数据类型"><a href="#常用数据类型" class="headerlink" title="常用数据类型"></a>常用数据类型</h2><p>　　在Python之中常用的数据类型包括：整数、浮点数、复数、布尔、字符串、列表、元组、字典和日期。</p>
+<p>　　范例：通过type()函数查看数据类型(新建文件type.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Hello,world!&quot;</span></span><br><span class="line">print(<span class="built_in">type</span>(message))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;str&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　“&lt;class ‘str’&gt;”表示message变量为字符串类型。</p>
+<h3 id="整数和浮点数"><a href="#整数和浮点数" class="headerlink" title="整数和浮点数"></a>整数和浮点数</h3><p>　　范例：两个整数相除（新建文件num.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">10</span></span><br><span class="line">num_b = <span class="number">4</span></span><br><span class="line">print(num_a/num_b)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.5</span></span><br></pre></td></tr></table></figure>
+
+<p>　　范例：获取数据类型（修改文件num.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">10</span></span><br><span class="line">num_b = <span class="number">4</span></span><br><span class="line">print(num_a/num_b)</span><br><span class="line">print(<span class="built_in">type</span>(num_a))</span><br><span class="line">print(<span class="built_in">type</span>(num_b))</span><br><span class="line">print(<span class="built_in">type</span>(num_a/num_b))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;int&#39;&gt;</span><br><span class="line">&lt;class &#39;int&#39;&gt;</span><br><span class="line">&lt;class &#39;float&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h3><p>　　复数数据类型不能直接使用，需要通过complex()函数。</p>
+<p>　　范例：使用复数（一）（新建文件complex.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">complex</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="comment"># 实部为10，虚部为2</span></span><br><span class="line">print(num)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(10+2j)</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：使用复数（二）（修改文件complex.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">complex</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="comment"># 实部为10，虚部为2</span></span><br><span class="line">print(num)</span><br><span class="line">print(num.real) <span class="comment"># 获取实部</span></span><br><span class="line">print(num.imag) <span class="comment"># 获取虚部</span></span><br><span class="line">print(num.conjugate()) <span class="comment"># 获取共轭复数</span></span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(10+2j)</span><br><span class="line">10.0</span><br><span class="line">2.0</span><br><span class="line">(10-2j)</span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔"><a href="#布尔" class="headerlink" title="布尔"></a>布尔</h3><p>　　“布尔”是19世纪一位英国数学家的名字，Python中布尔的取值：<code>True</code>和<code>False</code>。</p>
+<p>　　范例：使用布尔（一）（新建文件boolean.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="literal">True</span> <span class="comment"># Python中的True是首字母大写的</span></span><br><span class="line"><span class="keyword">if</span> flag: <span class="comment"># 分支语句</span></span><br><span class="line">        print(<span class="string">&quot;Hello,world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!</span><br></pre></td></tr></table></figure>
+
+<p>　　Python是通过C语言开发的，Python继承了布尔型值为0表示假，为非0表示真的特性。</p>
+<p>　　范例：使用布尔（二）（修改文件boolean.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="number">1</span> <span class="comment"># 非0</span></span><br><span class="line"><span class="keyword">if</span> flag: <span class="comment"># 分支语句</span></span><br><span class="line">        print(<span class="string">&quot;Hello,world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>　　字符串是一个开发中最为重要的的概念，Python中直接使用单引号<code>&#39;&#39;</code>或双引号<code>&quot;&quot;</code>进行字符串的定义，使用哪一种引号定义字符串都是一样的，但需统一，不同的引号可以嵌套。</p>
+<p>　　范例：引号嵌套（新建文件quotation_mark.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&#x27;&quot;Hello,world!&quot;&#x27;</span> <span class="comment"># 使用单引号定义字符串</span></span><br><span class="line">print(message)</span><br><span class="line">message = <span class="string">&quot;&#x27;Hello,ql!&#x27;&quot;</span> <span class="comment"># 使用双引号定义字符串</span></span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello,world!&quot;</span><br><span class="line">&#39;Hello,ql!&#39;</span><br></pre></td></tr></table></figure>
+
+<p>　　可使用<code>+</code>进行字符串的拼接操作。</p>
+<p>　　范例：字符串的拼接（新建文件string.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Hello,world!,&quot;</span>+<span class="string">&quot;Hello,ql!&quot;</span></span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!,Hello,ql!</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用转义字符串"><a href="#常用转义字符串" class="headerlink" title="常用转义字符串"></a>常用转义字符串</h4><table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">描述</th>
+<th align="center">符号</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\</td>
+<td align="center">续航符，实现字符串多行定义</td>
+<td align="center">\n</td>
+<td align="center">换行</td>
+</tr>
+<tr>
+<td align="center">\\</td>
+<td align="center">等价于“\”</td>
+<td align="center">\v</td>
+<td align="center">纵向制表符</td>
+</tr>
+<tr>
+<td align="center">\&#39;</td>
+<td align="center">等价于单引号</td>
+<td align="center">\t</td>
+<td align="center">横向制表符</td>
+</tr>
+<tr>
+<td align="center">\“</td>
+<td align="center">等价于双引号</td>
+<td align="center">\r</td>
+<td align="center">回车</td>
+</tr>
+<tr>
+<td align="center">\000</td>
+<td align="center">空字符串</td>
+<td align="center">\f</td>
+<td align="center">换页</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="center">退格</td>
+<td align="center">\oyy</td>
+<td align="center">八进制字符，如“\o12:”为换行</td>
+</tr>
+<tr>
+<td align="center">\e</td>
+<td align="center">转义</td>
+<td align="center">\xyy</td>
+<td align="center">十进制字符，如“\x0a”为换行</td>
+</tr>
+</tbody></table>
+<p>　　范例：使用转义字符串（新建文件escape.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Python:\&quot;Hello,world!\&quot;\n\tPython:\&quot;Hello,ql!\&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Python:&quot;Hello,world!&quot;</span><br><span class="line">        Python:&quot;Hello,ql!&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数input"><a href="#函数input" class="headerlink" title="函数input()"></a>函数input()</h3><p>　　利用函数input()，Python可以接受通过键盘输入的字符串类型的数据</p>
+<p>　　范例：通过键盘输入数据（新建文件input.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input_data = <span class="built_in">input</span>(<span class="string">&quot;你的名字：&quot;</span>) <span class="comment"># 给出提示字符串</span></span><br><span class="line">print(<span class="string">&quot;Python:Hello,&quot;</span>+input_data+<span class="string">&quot;!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你的名字：ql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的名字：ql</span><br><span class="line">Python:Hello,ql!</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：获取输入类型（修改文件input.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input_data = <span class="built_in">input</span>(<span class="string">&quot;你的名字：&quot;</span>) <span class="comment"># 给出提示字符串</span></span><br><span class="line">print(<span class="string">&quot;Python:Hello,&quot;</span>+input_data+<span class="string">&quot;!&quot;</span>)</span><br><span class="line">print(<span class="built_in">type</span>(input_data))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你的名字：ql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你的名字：ql</span><br><span class="line">Python:Hello,ql!</span><br><span class="line">&lt;class &#39;str&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据类型转换函数"><a href="#数据类型转换函数" class="headerlink" title="数据类型转换函数"></a>数据类型转换函数</h3><table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int（数据）</td>
+<td align="center">将指定数据转为整形数据</td>
+</tr>
+<tr>
+<td align="center">float（数据）</td>
+<td align="center">将指定数据转为浮点型数据</td>
+</tr>
+<tr>
+<td align="center">bool（数据）</td>
+<td align="center">将指定数据转为布尔型数据</td>
+</tr>
+<tr>
+<td align="center">str（数据）</td>
+<td align="center">将指定数据转为字符串型数据</td>
+</tr>
+</tbody></table>
+<p>　　范例：int()函数（一）（新建文件int.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;155&quot;</span></span><br><span class="line">temp = <span class="built_in">int</span>(<span class="built_in">str</span>)</span><br><span class="line">print(temp)</span><br><span class="line">print(<span class="built_in">type</span>(temp))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">155</span><br><span class="line">&lt;class &#39;int&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　如果字符串不是由规定字符组成，int.py就会产生异常。</p>
+<p>　　范例：字符串不是由规定字符组成（修改文件int.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;2BC9&quot;</span></span><br><span class="line">temp = <span class="built_in">int</span>(<span class="built_in">str</span>)</span><br><span class="line">print(temp)</span><br><span class="line">print(<span class="built_in">type</span>(temp))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;d:&#x2F;Python Learning&#x2F;20200205&#x2F;int.py&quot;, line 2, in &lt;module&gt;</span><br><span class="line">    temp &#x3D; int(str)</span><br><span class="line">ValueError: invalid literal for int() with base 10: &#39;2BC9&#39;</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：int()函数（二）（修改文件int.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;199&quot;</span></span><br><span class="line">num_f = <span class="string">&quot;199.6&quot;</span></span><br><span class="line">num_bol = <span class="literal">True</span> <span class="comment"># True转为整形数据1</span></span><br><span class="line">result = <span class="built_in">int</span>(<span class="built_in">str</span>) + <span class="built_in">int</span>(num_f) + <span class="built_in">int</span>(num_bol)</span><br><span class="line">print(result)</span><br><span class="line">print(<span class="built_in">type</span>(result))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">399</span><br><span class="line">&lt;class &#39;int&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：int()函数（三）（修改文件int.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第一个整数：&quot;</span>))</span><br><span class="line">num_b = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第二个整数：&quot;</span>))</span><br><span class="line">result = num_a + num_b</span><br><span class="line">print(num_a+<span class="string">&quot;+&quot;</span>+num_b+<span class="string">&quot;=&quot;</span>+result)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请输入第一个整数：12</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请输入第二个整数：13</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">请输入第一个整数：12</span><br><span class="line">请输入第二个整数：13</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;d:&#x2F;Python Learning&#x2F;20200205&#x2F;int.py&quot;, line 4, in &lt;module&gt;</span><br><span class="line">    print(num_a+&quot;+&quot;+num_b+&quot;&#x3D;&quot;+result)</span><br><span class="line">TypeError: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</span><br></pre></td></tr></table></figure>
+
+<p>　　使用<code>+</code>拼接任何数据与字符串时都需要先将任何数据转为字符串类型。</p>
+<p>　　范例：改正以上错误（修改文件int.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第一个整数：&quot;</span>))</span><br><span class="line">num_b = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入第二个整数：&quot;</span>))</span><br><span class="line">result = num_a + num_b</span><br><span class="line">print(<span class="built_in">str</span>(num_a)+<span class="string">&quot;+&quot;</span>+<span class="built_in">str</span>(num_b)+<span class="string">&quot;=&quot;</span>+<span class="built_in">str</span>(result))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请输入第一个整数：12</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请输入第二个整数：13</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请输入第一个整数：12</span><br><span class="line">请输入第二个整数：13</span><br><span class="line">12+13&#x3D;25</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p>　　在使用<code>+</code>拼接字符串时总是得先将所有数据转为字符串实在是太麻烦。Python沿用了传统的格式化输出标记和格式化输出辅助标记。</p>
+<h4 id="格式化输出标记"><a href="#格式化输出标记" class="headerlink" title="格式化输出标记"></a>格式化输出标记</h4><table>
+<thead>
+<tr>
+<th align="center">标记</th>
+<th align="center">描述</th>
+<th align="center">标记</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%c</td>
+<td align="center">输出单个字符字符串</td>
+<td align="center">%s</td>
+<td align="center">输出字符串</td>
+</tr>
+<tr>
+<td align="center">%d</td>
+<td align="center">输出整形</td>
+<td align="center">%f</td>
+<td align="center">输出浮点型，可设置精度</td>
+</tr>
+<tr>
+<td align="center">%e</td>
+<td align="center">以科学计数法格式输出，使用小写字母e</td>
+<td align="center">%E</td>
+<td align="center">以科学计数法格式输出，使用大写字母E</td>
+</tr>
+<tr>
+<td align="center">%g</td>
+<td align="center">%f和%e的简写</td>
+<td align="center">%G</td>
+<td align="center">%f和%E的简写</td>
+</tr>
+<tr>
+<td align="center">%u</td>
+<td align="center">输出无符号整型</td>
+<td align="center">%o</td>
+<td align="center">输出无符号八进制数</td>
+</tr>
+<tr>
+<td align="center">%x</td>
+<td align="center">输出无符号十六进制数</td>
+<td align="center">%X</td>
+<td align="center">输出无符号十六进制数（大写字母）</td>
+</tr>
+</tbody></table>
+<p>　　范例：格式化输出标记（新建文件format1.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">23</span></span><br><span class="line">url = <span class="string">&quot;https://ql-isaac.github,io&quot;</span></span><br><span class="line">qq = <span class="number">834471527</span></span><br><span class="line">message = <span class="string">&quot;ql今年%d岁，我的个人博客地址：%s，我的qq号码(十六进制)：0X%X。&quot;</span>%(age,url,qq)</span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ql今年23岁，我的个人博客地址：https:&#x2F;&#x2F;ql-isaac.github,io，我的qq号码(十六进制)：0X31BD0667。</span><br></pre></td></tr></table></figure>
+
+<h4 id="格式化输出辅助标记"><a href="#格式化输出辅助标记" class="headerlink" title="格式化输出辅助标记"></a>格式化输出辅助标记</h4><table>
+<thead>
+<tr>
+<th align="center">标记</th>
+<th align="center">描述</th>
+<th align="center">标记</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">定义宽度或小数点精度</td>
+<td align="center">#</td>
+<td align="center">在八进制数前面显示零（0），在十六进制数前面显示“0x”或“0X”</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">左对齐</td>
+<td align="center">0</td>
+<td align="center">显示位数不足时填充0</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">在正数前面显示加号</td>
+<td align="center">m.n</td>
+<td align="center">m设置显示总长度，n设置小数位数</td>
+</tr>
+<tr>
+<td align="center">空格</td>
+<td align="center">显示位数不足时填充空格</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">（var）</td>
+<td align="center">映射变量（字典参数）</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>　　范例：格式化输出辅助标记（一）（新建文件format2.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">192.121231311121231</span></span><br><span class="line">num_b = <span class="number">98.23</span></span><br><span class="line">print(<span class="string">&quot;%f,%f&quot;</span>%(num_a,num_b)) <span class="comment"># %f默认保留小数点后六位数字</span></span><br><span class="line">print(<span class="string">&quot;%5.2f,%10.2f&quot;</span>%(num_a,num_b))</span><br><span class="line">print(<span class="string">&quot;%5.2f,%010.2f&quot;</span>%(num_a,num_b))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.121231,98.230000</span><br><span class="line">192.12,     98.23</span><br><span class="line">192.12,0000098.23</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：格式化输出辅助标记（二）（修改文件format2.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">192.121231311121231</span></span><br><span class="line">num_b = <span class="number">98.23</span></span><br><span class="line">print(<span class="string">&quot;%(num_a)f,%(num_b)f&quot;</span>%<span class="built_in">vars</span>()) <span class="comment"># %f默认保留小数点后六位数字</span></span><br><span class="line">print(<span class="string">&quot;%(num_a)5.2f,%(num_b)10.2f&quot;</span>%<span class="built_in">vars</span>())</span><br><span class="line">print(<span class="string">&quot;%(num_a)5.2f,%(num_b)010.2f&quot;</span>%<span class="built_in">vars</span>())</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.121231,98.230000</span><br><span class="line">192.12,     98.23</span><br><span class="line">192.12,0000098.23</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数print"><a href="#函数print" class="headerlink" title="函数print()"></a>函数print()</h3><p>　　默认情况下使用函数print()都会进行换行，如果不希望换行，可以使用“end“参数。</p>
+<p>　　范例：使用“end“参数（新建文件print.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;Python:Hello,world&quot;</span>,end=<span class="string">&quot;!&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;Hello,ql!&quot;</span>,end=<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;ql:Hello,Python!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Python:Hello,world!Hello,ql!</span><br><span class="line">ql:Hello,Python!</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="数学运算符"><a href="#数学运算符" class="headerlink" title="数学运算符"></a>数学运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">范例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">加法计算</td>
+<td align="center">20 + 15 = 35</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">减法计算</td>
+<td align="center">20 - 15 = 5</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">乘法计算</td>
+<td align="center">20 * 15 = 300</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">除法计算</td>
+<td align="center">20 / 15 =</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">取模计算</td>
+<td align="center">10 % 3 = 1</td>
+</tr>
+<tr>
+<td align="center">**</td>
+<td align="center">幂运算</td>
+<td align="center">10 ** 3 = 1000</td>
+</tr>
+<tr>
+<td align="center">//</td>
+<td align="center">整除计算</td>
+<td align="center">10 // 3 = 3</td>
+</tr>
+</tbody></table>
+<p>　　范例：数学运算符（一）（新建文件arithmetic.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = (<span class="number">1</span> + <span class="number">2</span>) * (<span class="number">4</span> / <span class="number">2</span>)</span><br><span class="line">print(result)</span><br><span class="line">print(<span class="built_in">type</span>(result)) <span class="comment"># 只要进行了除法，返回的数据类型就是浮点型</span></span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6.0</span><br><span class="line">&lt;class &#39;float&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：数学运算符（二）（修改文件arithmetic.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = (<span class="number">1</span> + <span class="number">2</span>) * (<span class="number">4</span> // <span class="number">2</span>)</span><br><span class="line">print(result)</span><br><span class="line">print(<span class="built_in">type</span>(result)) </span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">&lt;class &#39;int&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="简化赋值运算符"><a href="#简化赋值运算符" class="headerlink" title="简化赋值运算符"></a>简化赋值运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">范例</th>
+<th align="center">形如</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+=</td>
+<td align="center">a += b</td>
+<td align="center">a = a + b</td>
+</tr>
+<tr>
+<td align="center">-=</td>
+<td align="center">a -= b</td>
+<td align="center">a = a - b</td>
+</tr>
+<tr>
+<td align="center">*=</td>
+<td align="center">a *= b</td>
+<td align="center">a = a * b</td>
+</tr>
+<tr>
+<td align="center">/=</td>
+<td align="center">a /= b</td>
+<td align="center">a = a / b</td>
+</tr>
+<tr>
+<td align="center">%=</td>
+<td align="center">a %= b</td>
+<td align="center">a = a % b</td>
+</tr>
+<tr>
+<td align="center">**=</td>
+<td align="center">a **= b</td>
+<td align="center">a = a ** b</td>
+</tr>
+<tr>
+<td align="center">//=</td>
+<td align="center">a //= b</td>
+<td align="center">a = a // b</td>
+</tr>
+</tbody></table>
+<p>　　范例：字符串上使用乘法（新建文件multiplication.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Hello,world!&quot;</span></span><br><span class="line">message *= <span class="number">3</span></span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello,world!Hello,world!Hello,world!</span><br></pre></td></tr></table></figure>
+
+<p>　　Python中没有自增（<code>++</code>）和自减（<code>--</code>）运算符，因为Python中所有的变量都为对象，所有的数据类型都为引用数据类型，而自增（<code>++</code>）和自减（<code>--</code>）运算符是只适用于基本数据类型的。</p>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">范例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">==</td>
+<td align="center">相等比较</td>
+<td align="center">1 == 1（True）</td>
+</tr>
+<tr>
+<td align="center">！=</td>
+<td align="center">不等比较</td>
+<td align="center">1 ！= 1（False）</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于比较</td>
+<td align="center">10 &gt; 5（True）</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于比较</td>
+<td align="center">10 &lt; 20（True）</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于比较</td>
+<td align="center">10 &gt;= 10（True）</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于比较</td>
+<td align="center">20 &lt;= 20（True）</td>
+</tr>
+</tbody></table>
+<p>　　关系运算符除了能针对数值型数据进行比较之外，还能比较字符串，比较字符串实际上就是依次比较字符的编码。</p>
+<p>　　范例：比较字符串（新建文件string.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;ql&quot;</span> == <span class="string">&quot;ql&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;ql&quot;</span> &gt; <span class="string">&quot;Ql&quot;</span> &gt; <span class="string">&quot;QL&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>　　如果想知道某单个字符字符串的编码，可使用ord()函数。</p>
+<p>　　范例：查看某单个字符字符串的编码（新建文件ord.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;小写的“l”的编码：%d，大写的“L”的编码：%d&quot;</span>%(<span class="built_in">ord</span>(<span class="string">&quot;l&quot;</span>),<span class="built_in">ord</span>(<span class="string">&quot;L&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小写的“l”的编码：108，大写的“L”的编码：76</span><br></pre></td></tr></table></figure>
+
+<p>　　顺便说明一下数字和大小写字母的编码范围：</p>
+<ul>
+<li>数字：”0“(48) ~ ”9“(57)</li>
+<li>大写字母：”A“(65) ~ ”Z“(90)</li>
+<li>小写字母：”a“(97) ~ “z”(122)</li>
+</ul>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">and</td>
+<td align="center">逻辑与</td>
+</tr>
+<tr>
+<td align="center">or</td>
+<td align="center">逻辑或</td>
+</tr>
+<tr>
+<td align="center">not</td>
+<td align="center">逻辑非</td>
+</tr>
+</tbody></table>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">位与</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">位或</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">位异或</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">位非</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;</td>
+<td align="center">左移运算符</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;</td>
+<td align="center">右移运算符</td>
+</tr>
+</tbody></table>
+<h4 id="进制转换函数"><a href="#进制转换函数" class="headerlink" title="进制转换函数"></a>进制转换函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin(数据)</td>
+<td>转换为二进制数据</td>
+</tr>
+<tr>
+<td>oct(数据)</td>
+<td>转换为八进制数据</td>
+</tr>
+<tr>
+<td>int(数据)</td>
+<td>转换为十进制数据</td>
+</tr>
+<tr>
+<td>hex(数据)</td>
+<td>转换为十六进制数据</td>
+</tr>
+</tbody></table>
+<h3 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h3><p>　　Python中所有的数据类型都为引用数据类型，id()函数可以获取相应的内存地址。</p>
+<p>　　范例：id()函数（新建文件id.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">2</span></span><br><span class="line">num_b = <span class="number">1</span> + <span class="number">1</span></span><br><span class="line">num_c = <span class="number">4</span> - <span class="number">2</span></span><br><span class="line">print(<span class="string">&quot;num_a变量的地址：%d&quot;</span>%<span class="built_in">id</span>(num_a))</span><br><span class="line">print(<span class="string">&quot;num_b变量的地址：%d&quot;</span>%<span class="built_in">id</span>(num_b))</span><br><span class="line">print(<span class="string">&quot;num_c变量的地址：%d&quot;</span>%<span class="built_in">id</span>(num_c))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_a变量的地址：1757145024</span><br><span class="line">num_b变量的地址：1757145024</span><br><span class="line">num_c变量的地址：1757145024</span><br></pre></td></tr></table></figure>
+
+<p>　　Python中相等比较运算符<code>==</code>类似于Java中的<code>equals()</code>。</p>
+<p>　　范例：内容相等比较（新建文件equals.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">2</span> <span class="comment"># 整形</span></span><br><span class="line">num_b =<span class="number">2.0</span> <span class="comment"># 浮点型</span></span><br><span class="line">print(<span class="string">&quot;整形变量地址：%d，浮点型变量地址：%d，两者内容是否相等：%s&quot;</span>%(<span class="built_in">id</span>(num_a),<span class="built_in">id</span>(num_b),(num_a == num_b)))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整形变量地址：1757145024，浮点型变量地址：11878208，两者内容是否相等：True</span><br></pre></td></tr></table></figure>
+
+<p>　　那么Java中的<code>==</code>在Python中用什么运算符替代呢？答案是身份运算符。</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">is</td>
+<td align="center">判断是否引用同一内存</td>
+</tr>
+<tr>
+<td align="center">is not</td>
+<td align="center">判断是否引用不同内存</td>
+</tr>
+</tbody></table>
+<p>　　范例：内存地址相等比较（修改文件equals.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">2</span> <span class="comment"># 整形</span></span><br><span class="line">num_b = <span class="number">2.0</span> <span class="comment"># 浮点型</span></span><br><span class="line">print(<span class="string">&quot;整形变量地址：%d，浮点型变量地址：%d，两者地址是否相等：%s&quot;</span>%(<span class="built_in">id</span>(num_a),<span class="built_in">id</span>(num_b),(num_a <span class="keyword">is</span> num_b)))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整形变量地址：1757145024，浮点型变量地址：16400192，两者内容是否相等：False</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支结构"><a href="#分支结构" class="headerlink" title="分支结构"></a>分支结构</h2><p>　　针对分支结构的实现，Python里有三个关键字：<code>if</code>、<code>elif</code>（Python单独提供了该关键字，同else if）和<code>else</code>，三种语法：</p>
+<ul>
+<li>if判断</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;布尔表达式&gt;:</span><br><span class="line">    &lt;语句块&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>if…else判断</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;布尔表达式&gt;:</span><br><span class="line">    &lt;语句块&gt;</span><br><span class="line"><span class="keyword">else</span>:    </span><br><span class="line">    &lt;语句块&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多条件判断</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;布尔表达式&gt;:    </span><br><span class="line">    &lt;语句块&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;布尔表达式&gt;:    </span><br><span class="line">    &lt;语句块&gt;</span><br><span class="line"><span class="keyword">elif</span> &lt;布尔表达式&gt;:</span><br><span class="line">    &lt;语句块&gt;</span><br><span class="line">    &lt;...&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;语句块&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　不得不说说Python中的缩进，Python根据缩进来判断代码行与前一个代码行的关系，类似于C和Java语言的大括号，PEP8建议每级缩进都使用四个空格，这既可提高可读性，又留下了足够多的多级缩进空间。</p>
+<p>　　范例：判断闰年（新建文件leap_year.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">year = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入一个年份：&quot;</span>))</span><br><span class="line"><span class="keyword">if</span> (year % <span class="number">4</span>) == <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">if</span>(year % <span class="number">100</span>) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span>(year % <span class="number">400</span>) == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">&quot;%d年是闰年&quot;</span>%(year)) <span class="comment"># 整百年里能被400整除的是闰年</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;%d年不是闰年&quot;</span>%(year))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&quot;%d年是闰年&quot;</span>%(year)) <span class="comment"># 非整百年里能被4整除的为闰年</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&quot;%d年不是闰年&quot;</span>%(year))</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2><p>　　循环结构指的就是某段代码重复地执行，在循环结构之中需要定义一个循环的条件，只有在满足循环条件时代码才执行，Python中循环结构有两种：while循环和for循环。</p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> &lt;循环条件&gt;:</span><br><span class="line">    &lt;循环语句块&gt;</span><br><span class="line">    &lt;修改循环条件&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　或</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> &lt;循环条件&gt;:</span><br><span class="line">    &lt;循环语句块&gt;</span><br><span class="line">    &lt;修改循环条件&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;循环条件不满足时执行的语句块&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：进行1~100的自然数的累加（新建文件accumulation.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">num = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> num &lt;= <span class="number">100</span>:</span><br><span class="line">    <span class="built_in">sum</span> = <span class="built_in">sum</span> + num</span><br><span class="line">    num += <span class="number">1</span></span><br><span class="line">print(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5050</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：打印1000以内的斐波那契数列（新建文件fibonacci_sequence.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num_a = <span class="number">0</span></span><br><span class="line">num_b = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> num_b &lt; <span class="number">1000</span>:</span><br><span class="line">    print(num_b,end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">    temp = num_b;</span><br><span class="line">    num_b = num_a + num_b</span><br><span class="line">    num_a = temp</span><br></pre></td></tr></table></figure>
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><table>
+<thead>
+<tr>
+<th>for循环</th>
+<th>for…else循环</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>for 变量 in 序列<br/>    循环语句</td>
+<td>for 变量 in 序列<br/>    循环语句<br/>else:<br/>    循环语句执行完毕后的语句</td>
+</tr>
+</tbody></table>
+<h2 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h2><p>　　Python在设计的过程中强调的一直是简洁性。在许多的编程语言中，都是首先利用了数组去描述多数据的存储，但是数组有长度固定，插入麻烦等缺点，因而才有了许多数据结构来满足我们的各种需求，Python则帮我们封装了数组和许多数据结构，相应着重提出了序列这一概念，将能动态修改的内容统一称为序列，在Python之中字符串、列表、元组、字典都属于序列。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>　　直接使用一对中括号定义列表，可使用索引访问列表元素，从0开始。</p>
+<p>　　范例：定义列表（新建文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">print(infos[<span class="number">0</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">1</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++、Java、Python</span><br></pre></td></tr></table></figure>
+
+<h4 id="列表的特性"><a href="#列表的特性" class="headerlink" title="列表的特性"></a>列表的特性</h4><p>　　范例：空列表不等同于None（新建文件None.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list_a = []</span><br><span class="line">list_b = <span class="literal">None</span></span><br><span class="line">print(<span class="string">&quot;list_a的地址为%d，类型为%s&quot;</span>%(<span class="built_in">id</span>(list_a),<span class="built_in">type</span>(list_a))</span><br><span class="line">print(<span class="string">&quot;list_b的地址为%d，类型为%s&quot;</span>%(<span class="built_in">id</span>(list_b),<span class="built_in">type</span>(list_b))</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_a的地址为13626696，类型为&lt;class &#39;list&#39;&gt;</span><br><span class="line">list_b的地址为1453821160，类型为&lt;class &#39;NoneType&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：在进行索引访问时不能越界（修改文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">print(infos[<span class="number">0</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">1</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">2</span>])</span><br><span class="line">print(infos[<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++、Java、Python</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;d:&#x2F;Python Learning&#x2F;（一）&#x2F;20200226&#x2F;list.py&quot;, line 5, in &lt;module&gt;</span><br><span class="line">    print(infos[3])</span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：列表除了可以正向索引访问之外，还可以反向索引访问（修改文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">print(infos[-<span class="number">3</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[-<span class="number">2</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++、Java、Python</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：通过列表保存多种数据类型（新建文件python.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;Python&quot;</span>,<span class="string">&quot;简洁&quot;</span>,[<span class="string">&quot;列表元素1&quot;</span>,<span class="string">&quot;列表元素2&quot;</span>,<span class="string">&quot;列表元素3&quot;</span>]] <span class="comment"># 数据的意义：编程语言（Python），特点（简洁），举例（列表）</span></span><br><span class="line">print(<span class="string">&quot;编程语言：%s&quot;</span>%infos[<span class="number">0</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;特点：%s&quot;</span>%infos[<span class="number">1</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;举例：%s&quot;</span>%infos[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">编程语言：Python、特点：简洁、举例：[&#39;列表元素1&#39;, &#39;列表元素2&#39;, &#39;列表元素3&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：使用for循环迭代输出（修改文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> pl <span class="keyword">in</span> infos:</span><br><span class="line">    print(pl)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++</span><br><span class="line">Java</span><br><span class="line">Python</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：使用for循环索引访问输出（修改文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(infos)):</span><br><span class="line">    print(infos[index])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++</span><br><span class="line">Java</span><br><span class="line">Python</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：根据索引修改数据内容（修改文件list.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">infos[<span class="number">1</span>] = <span class="string">&quot;PHP&quot;</span></span><br><span class="line">print(infos[<span class="number">0</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">1</span>],end=<span class="string">&quot;、&quot;</span>)</span><br><span class="line">print(infos[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C&#x2F;C++、PHP、Python</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：使用乘法（新建文件multiply.py）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>] * <span class="number">3</span></span><br><span class="line">print(infos)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#39;C&#x2F;C++&#39;, &#39;Java&#39;, &#39;Python&#39;, &#39;C&#x2F;C++&#39;, &#39;Java&#39;, &#39;Python&#39;, &#39;C&#x2F;C++&#39;, &#39;Java&#39;, &#39;Python&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>　　范例：使用加法（新建文件add.py)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">infos = [<span class="string">&quot;C/C++&quot;</span>,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;Python&quot;</span>] + [<span class="string">&quot;PHP&quot;</span>]</span><br><span class="line">print(infos)</span><br></pre></td></tr></table></figure>
+
+<p>　　打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#39;C&#x2F;C++&#39;, &#39;Java&#39;, &#39;Python&#39;, &#39;PHP&#39;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据分片"><a href="#数据分片" class="headerlink" title="数据分片"></a>数据分片</h4><p>　　列表的数据分片，即截取列表的一部分，即子列表</p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><h3 id="序列统计函数"><a href="#序列统计函数" class="headerlink" title="序列统计函数"></a>序列统计函数</h3><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h2 id="函数深入"><a href="#函数深入" class="headerlink" title="函数深入"></a>函数深入</h2><h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>　　lambda表达式即lambda函数，</p>
+<h3 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h3>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>ql-isaac</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2020/01/27/Python-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">http://example.com/2020/01/27/Python-Learning%EF%BC%88%E4%B8%80%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Windows-10-%E4%BC%81%E4%B8%9A%E7%89%88-LTSC/"># Windows 10 企业版 LTSC</a>
+                    
+                        <a href="/tags/Python-v3-8-1/"># Python v3.8.1</a>
+                    
+                        <a href="/tags/Visual-Studio-Code/"># Visual Studio Code</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/03/Linux-Learning%EF%BC%88%E4%B8%80%EF%BC%89/">Linux从入门到实践（一）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/24/%E4%BB%80%E4%B9%88%E6%98%AFGit%EF%BC%9F/">什么是Git？</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© ql-isaac | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | 2020 - 2021</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
