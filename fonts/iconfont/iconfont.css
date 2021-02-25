@@ -15,7 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-next:before {
+.icon-publish:before {
   content: "\e7b3";
 }
 
@@ -35,7 +35,7 @@
   content: "\e7d7";
 }
 
-.icon-chic:before {
+.icon-next:before {
   content: "\e7d8";
 }
 
